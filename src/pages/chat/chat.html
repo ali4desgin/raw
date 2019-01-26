@@ -1,0 +1,75 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{phone}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+  
+
+    <img  *ngIf="isimage"      [src]="base64Image"  />
+    <div class="message-wrap" *ngFor="let item of messages; let msgIndex = index" >
+  
+      <div 
+           class="message">
+
+           
+           
+          
+        <div class="msg-detail" >
+          <div class="msg-info" style="text-align: center">
+            <p>
+                {{item.created_at}}</p>
+          </div>
+
+          <img  *ngIf=" item.is_image == 'yes' && item.isAdmin =='yes' "      src="http://178.128.149.244/rawabi/public/chats/images/{{item.image}}"  class="thumbnail" style="float: left;"/>
+           <img  *ngIf=" item.is_image == 'yes' && item.isAdmin =='no' "      src="http://178.128.149.244/rawabi/public/chats/images/{{item.image}}"  class="thumbnail" style="float: right;" />
+
+
+
+
+          <div class="msg-content" *ngIf=" item.isAdmin == 'yes' &&  item.is_image == 'no'" style="background-color: #488aff; float: left;">
+            <!-- <span class="triangle" style="background-color: #488aff;color: white"></span> -->
+            <p style="color: white" class="line-breaker ">{{item.message}}</p>
+
+            
+          </div>
+
+          <div class="msg-content" *ngIf=" item.isAdmin == 'no'  &&  item.is_image == 'no'" style=" float: right;background-color: white;">
+              <!-- <span class="triangle"></span> -->
+              <p  class="line-breaker " style="color: #488aff" class="line-breaker ">{{item.message}}</p>
+  
+              
+            </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    
+ 
+  </ion-content>
+  
+  <ion-footer no-border   [style.height]="'55px'">
+    <div class="input-wrap">
+      <button *ngIf="haswhatsapp" ion-button clear icon-only item-right (click)="openwhats()" >
+        <ion-icon   name="logo-whatsapp"></ion-icon>
+       
+      </button>
+      <button ion-button clear icon-only item-right (click)="opengallery()" >
+        <ion-icon name="document"></ion-icon>
+       
+      </button>
+      <textarea #chat_input
+                placeholder="أكتب رسالة"
+                [(ngModel)]="editorMsg"
+               >
+      </textarea>
+      <button ion-button clear icon-only item-right (click)="sendMsg()">
+        <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+      </button>
+    </div>
+
+  </ion-footer>

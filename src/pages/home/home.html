@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon color="primary" name="menu"></ion-icon>
+    </button>
+
+   
+
+    <ion-title> الرئيسية</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+  <p  *ngIf="!isorder">
+
+   {{loadingtext}}
+
+  </p>
+
+    
+    <ion-list>
+        <ion-item   *ngFor="let item of orders; let msgIndex = index" (click)="openchat(item)">
+          <ion-avatar item-start >
+            <ion-text-avatar>{{item.id}}</ion-text-avatar>
+          </ion-avatar>
+          <h2  *ngIf=" item.type == 'card'" style=" display: inline-block">تقسيط جوالات</h2> 
+          <h2  *ngIf=" item.type == 'phone'" style=" display: inline-block">تقسيط بطاقات سوا</h2> 
+
+ 
+
+
+          <ion-icon  *ngIf=" item.status == 'pending'"  color="yellow" name="ios-alert-outline" item-end></ion-icon>
+          <ion-icon  *ngIf=" item.status == 'complete'"  color="primary" name="ios-done-all" item-end></ion-icon>
+          <ion-icon  *ngIf=" item.status == 'closed'"  color="danger" name="ios-close" item-end></ion-icon>
+          <ion-icon  *ngIf=" item.status == 'active'"  color="secondary" name="ios-checkmark" item-end></ion-icon>
+          <button (click)="viewDeatil(item,$event)" ion-button clear item-end>
+              <ion-badge id="notifications-badge" color="primary">عرض</ion-badge>
+        </button>
+        <!-- <button (click)="openchat(item)"  item-end>
+          <ion-badge id="notifications-badge" color="yellow">المحادثة</ion-badge>
+    </button> -->
+          <!-- <button >
+            <ion-icon   color="primary" name="information-circle" item-end></ion-icon>
+          </button> -->
+          
+          
+        </ion-item>
+       
+      </ion-list>
+      
+      
+ 
+  
+ 
+</ion-content>
